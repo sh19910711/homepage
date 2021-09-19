@@ -4,7 +4,7 @@ image:
 
 .PHONY: server
 server:
-	docker run -ti -v $(PWD):/wrk -p 8080:8080 homepage
+	docker run -ti -v $(PWD):/wrk -e PORT=8080 -p 8080:8080 homepage
 
 .PHONY: gem
 gem:

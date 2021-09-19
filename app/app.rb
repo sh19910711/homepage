@@ -11,7 +11,7 @@ module Homepage
     end
 
     configure do
-        $_notes = JSON.parse(File.read(File.expand_path('../data/20210919_homepage_notes.json', __FILE__)))
+        $_notes = JSON.parse(File.read('/wrk/data/20210919_homepage_notes.json'))
         $_note_refs = {}
         $_notes.each do |n|
             $_note_refs[n['note_id']] = n
