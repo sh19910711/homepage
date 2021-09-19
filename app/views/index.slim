@@ -1,0 +1,5 @@
+ul.notes
+  - @notes.each do |n|
+    li.note
+      a href="/homepage_archive_2020/notes/#{n['note_id']}"
+        = n['name']
