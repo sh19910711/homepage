@@ -18,12 +18,12 @@ module Homepage
         end
     end
 
-    get '/' do
+    get '/homepage_archive_2020/' do
         @notes = $_notes
         slim :index
     end
 
-    get '/notes/:note_id' do
+    get '/homepage_archive_2020/notes/:note_id' do
         raise unless /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ === params[:note_id].strip
 
         @note = $_note_refs[params[:note_id]]
