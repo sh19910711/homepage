@@ -9,12 +9,9 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "puma"
 gem "sinatra"
 gem "sinatra-contrib"
+gem "rack"
 gem "slim"
 gem "sass"
-gem "activerecord"
-gem "mysql2"
-gem "aws-sdk-s3"
-gem "elasticsearch", "~> 7.2.0"
 
 group :development do
   gem "byebug"

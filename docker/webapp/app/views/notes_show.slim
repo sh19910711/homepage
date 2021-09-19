@@ -1,37 +1,36 @@
 .row
   .col-sm-12
     h2.subject
-      = @note.subject
-    ul.note-tags
-      - @note.tags.each do |tag|
-        li.note-tag
-          a href="/tags/#{tag}"= tag
+      = @note['name']
     .date
-      = "Posted on #{@note.date}"
+      = "Posted on #{@note['date']}"
 
 .paragraphs
-  - @note.content.paragraphs.each do |p|
+  - @content['paragraphs'].each do |p|
     .paragraph
       .row
-        h3.paragraph-title.col-sm-12= p.title
-      - unless p.editor_hidden?
+        h3.paragraph-title.col-sm-12= p['title']
+      - unless p['config']['editorHide']
         .row
           .col-sm-12
-            pre.paragraph-text id="text-#{p.id}" data-mode="#{p.editor_mode}"
-                = p.text
-      - p.results.each do |r|
+            pre.paragraph-text id="text-#{p['id']}" data-mode="#{p['editorMode']}"
+                = p['text']
+      - p['results'].tap do |r|
+        - next if r.nil?
+        - next if r['msg'].empty?
+        - msg = r['msg'].first
         .row
           .col-sm-12
-            - if r.type === 'HTML' || r.type === 'ANGULAR'
-              == r.data
-            - elsif r.type === 'IMG'
-              img src="data:image/png;base64,#{r.data}"
-            - elsif r.type === 'GRAPH'
-              script.graph type="application/json" data-config="#{r.config.to_json}"
-                == r.data
+            - if msg['type'] === 'HTML' || msg['type'] === 'ANGULAR'
+              == msg['data']
+            - elsif msg['type'] === 'IMG'
+              img src="data:image/png;base64,#{msg['data']}"
+            - elsif msg['type'] === 'GRAPH'
+              script.graph type="application/json" data-config="#{r['config'].to_json}"
+                == msg['data']
             - else
-              pre.paragraph-results id="results-#{p.id}"
-                = r.data
+              pre.paragraph-results id="results-#{p['id']}"
+                = msg['data']
 
 sass:
   .paragraph-title

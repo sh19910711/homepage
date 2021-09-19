@@ -1,18 +1,13 @@
-FROM ruby:2.6.5-alpine
+FROM ruby:2.7.4
 
-RUN bundle --version
 ADD ./Gemfile /tmp
-ADD ./Gemfile.lock /tmp
 WORKDIR /tmp
-RUN apk update && \
-  apk add \
-    build-base \
-    libffi-dev \
-    mysql-dev && \
-  /usr/local/bin/bundle install -j4 --without development
+RUN bundle install -j4 --without development
 
 RUN mkdir /wrk
-ADD ./ /wrk
+ADD ./app /wrk
+ADD ./config.ru /wrk
+ADD ./data /wrk
 WORKDIR /wrk
 
 ENV RACK_ENV=production

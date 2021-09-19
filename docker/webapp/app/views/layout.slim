@@ -4,8 +4,6 @@ html
     title= @title
     link rel="shortcut icon" size="16x16" href="https://static.sano.ninja/img/favicon.png"
 
-    == og_meta
-
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
 
     // bootstrap
@@ -154,13 +152,6 @@ html
     .container#main
       .row
         .col-xl-9#contents== yield
-        .col-xl-3#sidebar
-          .sidebar-box
-            ul
-              - aggregated_tags.each do |tag|
-                li
-                  a href="/tags/#{tag['key']}"= tag['key']
-                  span= " (#{tag['doc_count']})"
 
     #footer
       .container
